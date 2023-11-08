@@ -1,3 +1,9 @@
+<?php
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -55,6 +61,56 @@
                     </li>
                 </ul>
             </div>
+            
+            <!-- Periksa apakah pengguna sudah login, jika iya, tampilkan "Logout" -->
+            <?php
+            if (isset($_SESSION['login'])) {
+            ?>
+            <form action="">
+                <div class="collapse navbar-collapse" id="navbarNavRegis">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" href="logout.php">
+                                Logout
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </form>
+            <?php
+            } else {
+            ?>
+
+            <form action="">
+            <div class="collapse navbar-collapse" id="navbarNavRegis">
+                <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="index.php?page=registrasiUser">
+                    Registrasi
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="index.php?page=loginUser">
+                    Login
+                    </a>
+                </li>
+                </ul>
+            </form>
+            <?php
+            }
+            ?>
+            <!-- <ul class="navbar-nav mr-3"> <!-- Menempatkan item di sebelah kanan -->
+                <!-- <li class="nav-item">
+                    <a class="nav-link mr-3" aria-current="page" href="index.php?page=registrasiUser">
+                        Registrasi
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link mr-3" aria-current="page" href="index.php?page=loginUser">
+                        Login
+                    </a>
+                </li> -->
+            <!-- </ul> --> -->
         </div>
     </nav>
 </body>

@@ -1,4 +1,11 @@
 <?php
+// Periksa apakah pengguna sudah login
+if (!isset($_SESSION['login'])) {
+    // Jika belum login, arahkan kembali ke halaman login
+    header('Location: index.php?page=loginUser');
+    exit;
+}
+
 // Include your database connection file (koneksi.php) to establish the connection
 include_once("koneksi.php");
 
@@ -72,19 +79,19 @@ if (isset($_GET['aksi'])) {
             }
             ?>
             <div class="form-group">
-                <label for="inputNama" class="control-label mt-2">Nama</label>
+                <label for="inputNama" class="control-label mt-2 fw-bold">Nama</label>
                 <div>
                     <input type="text" class="form-control" name="nama" id="inputNama" placeholder="Nama" value="<?php echo $nama ?>">
                 </div>
             </div>
             <div class="form-group">
-                <label for="inputAlamat" class="control-label mt-2">Alamat</label>
+                <label for="inputAlamat" class="control-label mt-2 fw-bold">Alamat</label>
                 <div>
                     <input type="text" class="form-control" name="alamat" id="inputAlamat" placeholder="Alamat" value="<?php echo $alamat ?>">
                 </div>
             </div>
             <div class="form-group">
-                <label for="inputNohp" class="control-label mt-2">No Hp</label>
+                <label for="inputNohp" class="control-label mt-2 fw-bold">No Hp</label>
                 <div>
                     <input type="text" class="form-control" name="no_hp" id="inputNohp" placeholder="No HP" value="<?php echo $no_hp ?>">
                 </div>

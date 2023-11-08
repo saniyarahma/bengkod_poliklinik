@@ -1,4 +1,11 @@
 <?php
+// Periksa apakah pengguna sudah login
+if (!isset($_SESSION['login'])) {
+    // Jika belum login, arahkan kembali ke halaman login
+    header('Location: index.php?page=loginUser');
+    exit;
+}
+
 // Include your database connection file (koneksi.php) to establish the connection
 include_once("koneksi.php");
 
@@ -8,15 +15,17 @@ if (isset($_POST['simpan'])) {
                                         id_pasien = '" . $_POST['id_pasien'] . "',
                                         id_dokter = '" . $_POST['id_dokter'] . "',
                                         tgl_periksa = '" . $_POST['tgl_periksa'] . "',
-                                        catatan = '" . $_POST['catatan'] . "'
+                                        catatan = '" . $_POST['catatan'] . "',
+                                        obat = '" . $_POST['obat'] . "'
                                         WHERE id = '" . $_POST['id'] . "'");
     } else {
-        $tambah = mysqli_query($mysqli, "INSERT INTO periksa (id_pasien, id_dokter, tgl_periksa, catatan) 
+        $tambah = mysqli_query($mysqli, "INSERT INTO periksa (id_pasien, id_dokter, tgl_periksa, catatan, obat) 
                                         VALUES (
                                             '" . $_POST['id_pasien'] . "',
                                             '" . $_POST['id_dokter'] . "',
                                             '" . $_POST['tgl_periksa'] . "',
-                                            '" . $_POST['catatan'] . "'
+                                            '" . $_POST['catatan'] . "',
+                                            '" . $_POST['obat'] . "'
                                         )");
     }
 
@@ -61,6 +70,7 @@ if (isset($_GET['aksi'])) {
             $id_dokter = '';
             $tgl_periksa = '';
             $catatan = '';
+            $obat = '';
             if (isset($_GET['id'])) {
                 $ambil = mysqli_query($mysqli, "SELECT * FROM periksa WHERE id='" . $_GET['id'] . "'");
                 while ($row = mysqli_fetch_array($ambil)) {
@@ -68,6 +78,7 @@ if (isset($_GET['aksi'])) {
                     $id_dokter = $row['id_dokter'];
                     $tgl_periksa = $row['tgl_periksa'];
                     $catatan = $row['catatan'];
+                    $obat = $row['obat'];
                 }
             ?>
                 <input type="hidden" name="id" value="<?php echo $_GET['id'] ?>">
@@ -75,7 +86,7 @@ if (isset($_GET['aksi'])) {
             }
             ?>
             <div class="form-group mx-sm-3 mb-2">
-                <label for="inputPasien" class="sr-only">Pasien</label>
+                <label for="inputPasien" class="sr-only fw-bold">Pasien</label>
                 <select class="form-control" name="id_pasien">
                     <option hidden>Pilih Pasien</option>
                     <?php
@@ -93,7 +104,7 @@ if (isset($_GET['aksi'])) {
                     }
                     ?>
                 </select>
-                <label for="inputDokter" class="sr-only">Dokter</label>
+                <label for="inputDokter" class="sr-only fw-bold">Dokter</label>
                 <select class="form-control" name="id_dokter">
                     <option hidden>Pilih Dokter</option>
                     <?php
@@ -111,16 +122,20 @@ if (isset($_GET['aksi'])) {
                     }
                     ?>
                 </select>
-                <label for="inputTanggal" class="control-label mt-2">Tanggal Periksa</label>
+                <label for="inputTanggal" class="control-label mt-2 fw-bold">Tanggal Periksa</label>
                 <div>
                     <input type="datetime-local" class="form-control" name="tgl_periksa" id="inputTanggal" placeholder="Tanggal Periksa" value="<?php echo $tgl_periksa ?>">
                 </div>
-                <label for="inputCatatan" class="control-label mt-2">Catatan</label>
+                <label for="inputCatatan" class="control-label mt-2 fw-bold">Catatan</label>
                 <div>
                     <input type="text" class="form-control" name="catatan" id="inputCatatan" placeholder="Catatan" value="<?php echo $catatan ?>">
                 </div>
+                <label for="inputObat" class="control-label mt-2 fw-bold">Obat</label>
                 <div>
-                    <button type="submit" class="btn btn-primary mt-3" name="simpan">Simpan</button>
+                    <input type="text" class="form-control" name="obat" id="inputObat" placeholder="Obat" value="<?php echo $obat ?>">
+                </div>
+                <div>
+                    <button type="submit" class="btn btn-primary mt-3 fw-bold" name="simpan">Simpan</button>
                 </div>
             </div>
         </form>
@@ -135,6 +150,7 @@ if (isset($_GET['aksi'])) {
                     <th scope="col">Nama Dokter</th>
                     <th scope="col">Tanggal Periksa</th>
                     <th scope="col">Catatan</th>
+                    <th scope="col">Obat</th>
                     <th scope="col">Aksi</th>
                 </tr>
             </thead>
@@ -151,6 +167,7 @@ if (isset($_GET['aksi'])) {
                         <td><?php echo $data['nama_dokter'] ?></td>
                         <td><?php echo $data['tgl_periksa'] ?></td>
                         <td><?php echo $data['catatan'] ?></td>
+                        <td><?php echo $data['obat'] ?></td>
                         <td>
                             <a class="btn btn-success rounded-pill px-3" href="index.php?page=periksa&id=<?php echo $data['id'] ?>">Ubah</a>
                             <a class="btn btn-danger rounded-pill px-3" href="index.php?page=periksa&id=<?php echo $data['id'] ?>&aksi=hapus">Hapus</a>

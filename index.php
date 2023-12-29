@@ -17,8 +17,12 @@ if (session_status() == PHP_SESSION_NONE) {
     <!-- <link rel="stylesheet" href="assets/css/bootstrap.css">  -->
 
     <!-- Bootstrap Online -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <title>Poliklinik</title> <!--Judul Halaman-->
 </head>
 
@@ -50,6 +54,11 @@ if (session_status() == PHP_SESSION_NONE) {
                             <li>
                                 <a class="dropdown-item" href="index.php?page=pasien">
                                     Pasien
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="index.php?page=obat">
+                                    Obat
                                 </a>
                             </li>
                         </ul>
@@ -99,18 +108,6 @@ if (session_status() == PHP_SESSION_NONE) {
             <?php
             }
             ?>
-            <!-- <ul class="navbar-nav mr-3"> <!-- Menempatkan item di sebelah kanan -->
-                <!-- <li class="nav-item">
-                    <a class="nav-link mr-3" aria-current="page" href="index.php?page=registrasiUser">
-                        Registrasi
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link mr-3" aria-current="page" href="index.php?page=loginUser">
-                        Login
-                    </a>
-                </li> -->
-            <!-- </ul> --> -->
         </div>
     </nav>
 </body>
